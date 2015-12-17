@@ -2,6 +2,8 @@
   <dictionary name="HolmanD">
     <words>
       <w>chromedriver</w>
+      <w>dirx</w>
+      <w>iframe</w>
       <w>testurl</w>
       <w>webdriver</w>
     </words>
