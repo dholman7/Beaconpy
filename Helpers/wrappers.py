@@ -21,7 +21,7 @@ def click(self, selector, do_not_wait=False):
 
 def enter_text(self, selector, text):
     element = WebDriverWait(self.browser, self._IMPLICIT_WAIT).until(
-            EC.visibility_of_element_located(selector))
+            ec.visibility_of_element_located(selector))
     element.click()
     element.clear()
     element.send_keys(text)
@@ -42,13 +42,13 @@ def wait_for_ajax(self):
 def get_element(self, selector, multiple=False):
     if multiple:
         elements = WebDriverWait(self.browser, self._IMPLICIT_WAIT).until(
-                EC.presence_of_all_elements_located(
+                ec.presence_of_all_elements_located(
                         selector
                 )
         )
         return elements
     element = WebDriverWait(self.browser, self._IMPLICIT_WAIT).until(
-            EC.presence_of_element_located(
+            ec.presence_of_element_located(
                     selector
             )
     )
@@ -58,7 +58,7 @@ def get_element(self, selector, multiple=False):
 def accept_alert(self, accept=True):
     alert = WebDriverWait(
             self.browser, self._IMPLICIT_WAIT).until(
-            EC.alert_is_present()
+            ec.alert_is_present()
     )
     if accept:
         alert.accept()
@@ -68,16 +68,16 @@ def accept_alert(self, accept=True):
 
 def hover(self, selector):
     element = WebDriverWait(self.browser, self._IMPLICIT_WAIT).until(
-            EC.presence_of_element_located(selector))
+            ec.presence_of_element_located(selector))
     hover = ActionChains(self.browser).move_to_element(element)
     hover.perform()
 
 
 def drag_and_drop(self, src_selector, dest_selector):
     source = WebDriverWait(self.browser, self._IMPLICIT_WAIT).until(
-            EC.presence_of_element_located(src_selector))
+            ec.presence_of_element_located(src_selector))
     destination = WebDriverWait(self.browser, self._IMPLICIT_WAIT).until(
-            EC.presence_of_element_located(dest_selector))
+            ec.presence_of_element_located(dest_selector))
     drag = ActionChains(self.browser).drag_and_drop(source, destination)
     drag.perform()
 
@@ -88,7 +88,7 @@ def switch_to_iframe(self, iframe=None):
     try:
         WebDriverWait(
                 self.browser, self._IMPLICIT_WAIT).until(
-                EC.frame_to_be_available_and_switch_to_it(iframe)
+                ec.frame_to_be_available_and_switch_to_it(iframe)
         )
     except NoSuchWindowException:
         self.browser.switch_to.window(self.browser.window_handles[-1])
